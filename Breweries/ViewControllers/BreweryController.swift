@@ -11,7 +11,7 @@ import UIKit
 class BreweryController: UIViewController {
     @IBOutlet private weak var customNavigationBar: CustomNavigationBar!
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var textField: UITextField!
     private let network = Network()
     private var brewery = [Brewery]() {
         didSet {
@@ -21,6 +21,7 @@ class BreweryController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setSearchPlaceholder()
         getBrewery(search: nil)
     }
     
@@ -32,6 +33,16 @@ class BreweryController: UIViewController {
             }
         }
     }
+    
+    private func setSearchPlaceholder() {
+        let fullString = NSMutableAttributedString()
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = UIImage(systemName: "magnifyingglass")?.withTintColor(.lightGray)
+        let imageString = NSAttributedString(attachment: imageAttachment)
+        fullString.append(imageString)
+        fullString.append(NSAttributedString(string: " Search"))
+        textField.attributedPlaceholder = fullString
+    }
 }
 
 extension BreweryController: UITableViewDelegate, UITableViewDataSource {
@@ -40,15 +51,11 @@ extension BreweryController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-        cell.textLabel?.text = brewery[indexPath.row].name
-        cell.detailTextLabel?.text = brewery[indexPath.row].city
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! BreweryTableViewCell
+        let brewery = self.brewery[indexPath.row]
+        cell.nameLabel.text = brewery.name
+//        cell.descriptionLabel.text = "Brewery type: \(brewery.breweryType)\nCountry: \(brewery.country)\nCity: \(brewery.city)"
         return cell
     }
 }
 
-extension BreweryController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        getBrewery(search: searchText)
-    }
-}
