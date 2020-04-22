@@ -5,7 +5,7 @@
 //  Created by Pavel Bondar on 18.04.2020.
 //  Copyright © 2020 Pavel Bondar. All rights reserved.
 //
-
+import Foundation
 import RealmSwift
 
 @objcMembers
@@ -26,15 +26,15 @@ class BreweryObject: Object {
     var tagList = List<String>()
 }
 
-protocol DBManager {
+protocol BreweriesStorage: class {
     func save(brewery: BreweryObject)
     func obtainBrewery() -> [Brewery]
     func saveBrewerys(brewery: [Brewery]) -> [Brewery]
     func clearAll()
 }
 
-class DBManagerImpl: DBManager {
-    private lazy var mainRealm: Realm =  {
+class BreweriesStorageImpl: BreweriesStorage {
+    lazy var mainRealm: RealmDescribing =  {
         let config = Realm.Configuration(schemaVersion: 2)
         Realm.Configuration.defaultConfiguration = config
         return try! Realm(configuration: .defaultConfiguration)
@@ -65,9 +65,6 @@ class DBManagerImpl: DBManager {
     }
     // MARK: - saveBrewerys
     func saveBrewerys(brewery: [Brewery]) -> [Brewery] {
-        if brewery.isEmpty {
-            return [Brewery]()
-        }
         brewery.forEach {
             let brewer = BreweryObject(
                 value: [
@@ -79,10 +76,10 @@ class DBManagerImpl: DBManager {
                     $0.state,
                     $0.postalCode,
                     $0.country,
-                    $0.longitude!,
-                    $0.latitude!,
+                    $0.longitude,
+                    $0.latitude,
                     $0.phone,
-                    $0.websiteUrl!,
+                    $0.websiteUrl,
                     $0.updatedAt,
                     $0.tagList
                 ]
@@ -94,7 +91,6 @@ class DBManagerImpl: DBManager {
     // MARK: - obtainBrewery
     func obtainBrewery() -> [Brewery] {
         let models = mainRealm.objects(BreweryObject.self)
-        if models.isEmpty { return [Brewery]() }
         var breweries = [Brewery]()
         models.forEach {
             let brewery = Brewery(

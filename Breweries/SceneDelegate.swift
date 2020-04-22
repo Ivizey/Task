@@ -45,3 +45,16 @@ extension UIView {
         }
     }
 }
+
+extension UITextField {
+    func imagePlaceholder(image: UIImage?, string: String) {
+        guard let image = image else { return }
+        let fullString = NSMutableAttributedString()
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = image.withTintColor(.lightGray)
+        let imageString = NSAttributedString(attachment: imageAttachment)
+        fullString.append(imageString)
+        fullString.append(NSAttributedString(string: string))
+        attributedPlaceholder = fullString
+    }
+}

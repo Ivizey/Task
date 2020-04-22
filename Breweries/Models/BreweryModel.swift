@@ -17,10 +17,10 @@ struct Brewery: Decodable {
     let state: String
     let postalCode: String
     let country: String
-    let longitude: Double?
-    let latitude: Double?
+    let longitude: Double
+    let latitude: Double
     let phone: String
-    let websiteUrl: String?
+    let websiteUrl: String
     let updatedAt: String
     let tagList: [String]
     
@@ -54,8 +54,8 @@ extension Brewery {
         self.state = try container.decode(String.self, forKey: .state)
         self.postalCode = try container.decode(String.self, forKey: .postalCode)
         self.country = try container.decode(String.self, forKey: .country)
-        self.longitude = Double(try container.decode(String.self, forKey: .longitude))
-        self.latitude = Double(try container.decode(String.self, forKey: .latitude))
+        self.longitude = Double(try container.decode(String.self, forKey: .longitude))!
+        self.latitude = Double(try container.decode(String.self, forKey: .latitude))!
         self.phone = try container.decode(String.self, forKey: .phone)
         self.websiteUrl = try container.decode(String.self, forKey: .websiteUrl)
         self.updatedAt = try container.decode(String.self, forKey: .updatedAt)

@@ -11,17 +11,11 @@ import MapKit
 
 class MapController: UIViewController {
     @IBOutlet weak private var mapView: MKMapView!
+    var location: Location = Location(title: nil, locationName: nil, coordinate: CLLocationCoordinate2D())
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        openMap(location: Location(
-            title: "Avondale Brewing Co",
-            locationName: "201 41st St S",
-            coordinate: CLLocationCoordinate2D(
-                latitude: 33.524521,
-                longitude: -86.774322)
-            )
-        )
+        openMap(location: location)
     }
     
     // MARK: - openMap
@@ -36,6 +30,5 @@ class MapController: UIViewController {
         
         mapView.setRegion(region, animated: true)
         mapView.addAnnotation(annotation)
-        mapView.translatesAutoresizingMaskIntoConstraints = true
     }
 }
