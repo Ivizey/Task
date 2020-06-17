@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapController: UIViewController {
+class MapView: UIViewController {
     @IBOutlet weak private var mapView: MKMapView!
     var location: Location = Location(title: nil, locationName: nil, coordinate: CLLocationCoordinate2D())
     
