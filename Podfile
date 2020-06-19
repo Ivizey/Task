@@ -6,6 +6,5 @@ target 'Breweries' do
   use_frameworks!
 
   # Pods for Breweries
-  pod 'RealmSwift'
 
 end

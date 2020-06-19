@@ -13,48 +13,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
-    }
-}
-
-extension UIView {
-    @IBInspectable
-    var borderWidth: CGFloat {
-        get {
-            return layer.borderWidth
-        }
-        set {
-            layer.borderWidth = newValue
-        }
-    }
-    
-    @IBInspectable
-    var borderColor: UIColor? {
-        get {
-            if let color = layer.borderColor {
-                return UIColor(cgColor: color)
-            }
-            return nil
-        }
-        set {
-            if let color = newValue {
-                layer.borderColor = color.cgColor
-            } else {
-                layer.borderColor = nil
-            }
-        }
-    }
-}
-
-extension UITextField {
-    func imagePlaceholder(image: UIImage?, string: String) {
-        guard let image = image else { return }
-        let fullString = NSMutableAttributedString()
-        let imageAttachment = NSTextAttachment()
-        imageAttachment.image = image.withTintColor(.lightGray)
-        let imageString = NSAttributedString(attachment: imageAttachment)
-        fullString.append(imageString)
-        fullString.append(NSAttributedString(string: string))
-        attributedPlaceholder = fullString
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Charter", size: 24) ?? UIFont.systemFont(ofSize: 24),
+            .foregroundColor: UIColor.white,
+        ]
+        
+        let navigationController = UINavigationController()
+        navigationController.navigationBar.barTintColor = #colorLiteral(red: 0.238032639, green: 0.5622211695, blue: 0.05326066166, alpha: 1)
+        navigationController.navigationBar.tintColor = .white
+        navigationController.navigationBar.titleTextAttributes = attributes
+        
+        let assemblyBuilder = AsselderModuleBuilder()
+        let router = Router(navigationController: navigationController, asseblyBuilder: assemblyBuilder)
+        router.initialViewController()
+        
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
     }
 }

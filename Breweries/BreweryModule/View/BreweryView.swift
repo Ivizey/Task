@@ -12,6 +12,12 @@ import MapKit
 class BreweryView: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     var presenter: BreweriesViewPresenterProtocol!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.register(UINib(nibName: "BreweryTableViewCell", bundle: nil),
+                           forCellReuseIdentifier: "BreweryTableViewCell")
+    }
 }
 
 extension BreweryView: UITableViewDataSource {
@@ -20,10 +26,9 @@ extension BreweryView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BreweryTableViewCell", for: indexPath) as! BreweryTableViewCell
         let brewery = presenter.breweries?[indexPath.row]
-        cell.textLabel?.text = brewery?.name
-        cell.detailTextLabel?.text = brewery?.city
+        cell.setupCell(brewery: brewery)
         return cell
     }
 }
@@ -38,8 +43,7 @@ extension BreweryView: UITableViewDelegate {
                                     longitude: brewery?.longitude ?? 0
             )
         )
-        let mapView = AsselderModuleBuilder.createMapModule(location: location)
-        navigationController?.pushViewController(mapView, animated: true)
+        presenter.tapOnTheItem(location: location)
     }
 }
 

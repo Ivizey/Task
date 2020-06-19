@@ -11,15 +11,22 @@ import MapKit
 
 class MapView: UIViewController {
     @IBOutlet weak private var mapView: MKMapView!
-    var location: Location = Location(title: nil, locationName: nil, coordinate: CLLocationCoordinate2D())
+    var presenter: MapViewPresenterProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        openMap(location: location)
+        presenter.setTitle()
+        presenter.setLocation()
+    }
+}
+
+extension MapView: MapViewProtocol {
+    func setTitle(title: String?) {
+        self.title = title
     }
     
-    // MARK: - openMap
-    private func openMap(location: Location) {
+    func setLocation(location: Location?) {
+        guard let location = location else { return }
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         let region = MKCoordinateRegion(center: location.coordinate, span: span)
         let annotation = MKPointAnnotation()

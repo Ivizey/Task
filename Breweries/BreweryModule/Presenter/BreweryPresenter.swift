@@ -14,19 +14,22 @@ protocol BreweriesViewProtocol: class {
 }
 
 protocol BreweriesViewPresenterProtocol: class {
-    init(view: BreweriesViewProtocol, networkService: NetworkServiceProtocol)
+    init(view: BreweriesViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     func getBreweries()
     var breweries: [Brewery]? { get set }
+    func tapOnTheItem(location: Location?)
 }
 
 class BreweriesPresenter: BreweriesViewPresenterProtocol{
     weak var view: BreweriesViewProtocol?
     let networkService: NetworkServiceProtocol!
+    var router: RouterProtocol?
     var breweries: [Brewery]?
     
-    required init(view: BreweriesViewProtocol, networkService: NetworkServiceProtocol) {
+    required init(view: BreweriesViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.view = view
         self.networkService = networkService
+        self.router = router
         getBreweries()
     }
     
@@ -43,5 +46,9 @@ class BreweriesPresenter: BreweriesViewPresenterProtocol{
                 }
             }
         }
+    }
+    
+    func tapOnTheItem(location: Location?) {
+        router?.showMap(location: location)
     }
 }

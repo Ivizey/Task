@@ -16,8 +16,9 @@ protocol AsselderBuilderProtocol {
 class AsselderModuleBuilder: AsselderBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController {
         let view = BreweryView()
+        view.title = "Breweries"
         let networkService = NetworkService()
-        let presenter = BreweriesPresenter(view: view, networkService: networkService)
+        let presenter = BreweriesPresenter(view: view, networkService: networkService, router: router)
         view.presenter = presenter
         return view
     }

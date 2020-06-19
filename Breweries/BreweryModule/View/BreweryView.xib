@@ -18,24 +18,45 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="o23-dY-vzm">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="o23-dY-vzm">
+                    <rect key="frame" x="0.0" y="94" width="414" height="768"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="RjT-Yr-dnN"/>
                         <outlet property="delegate" destination="-1" id="RHb-FC-pVB"/>
                     </connections>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ncm-Cq-anL">
+                    <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cuX-C0-sqK">
+                            <rect key="frame" x="10" y="8" width="394" height="34"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" red="0.28202363850000001" green="0.6055960655" blue="0.1114733592" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="PiR-Kf-dAJ"/>
+                        <constraint firstItem="cuX-C0-sqK" firstAttribute="leading" secondItem="ncm-Cq-anL" secondAttribute="leading" constant="10" id="WOf-qk-Mo8"/>
+                        <constraint firstAttribute="bottom" secondItem="cuX-C0-sqK" secondAttribute="bottom" constant="8" id="YJF-cY-r20"/>
+                        <constraint firstItem="cuX-C0-sqK" firstAttribute="top" secondItem="ncm-Cq-anL" secondAttribute="top" constant="8" id="q5G-Wx-Enq"/>
+                        <constraint firstAttribute="trailing" secondItem="cuX-C0-sqK" secondAttribute="trailing" constant="10" id="ufj-cg-0ZY"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="o23-dY-vzm" secondAttribute="bottom" id="BRm-2D-tza"/>
-                <constraint firstItem="o23-dY-vzm" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Ua2-X7-Ikm"/>
                 <constraint firstItem="o23-dY-vzm" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="bP3-0N-91g"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="o23-dY-vzm" secondAttribute="trailing" id="dSh-CF-MjI"/>
+                <constraint firstItem="ncm-Cq-anL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="iCI-NJ-5lv"/>
+                <constraint firstItem="o23-dY-vzm" firstAttribute="top" secondItem="ncm-Cq-anL" secondAttribute="bottom" id="jUe-Gm-PnJ"/>
+                <constraint firstItem="ncm-Cq-anL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="k0I-qn-1co"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ncm-Cq-anL" secondAttribute="trailing" id="nGW-c8-8Kw"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="139" y="117"/>
+            <point key="canvasLocation" x="137.68115942028987" y="116.51785714285714"/>
         </view>
     </objects>
 </document>

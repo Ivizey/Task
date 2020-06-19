@@ -8,21 +8,33 @@
 
 import Foundation
 
-protocol MapViewProtocol {
+protocol MapViewProtocol: class {
     func setLocation(location: Location?)
+    func setTitle(title: String?)
 }
 
-protocol MapViewPresenterProtocol {
+protocol MapViewPresenterProtocol: class {
     init(view: MapViewProtocol, networkService: NetworkServiceProtocol, location: Location?)
     func setLocation()
+    func setTitle()
 }
 
 class MapPresenter: MapViewPresenterProtocol {
+    weak var view: MapViewProtocol?
+    let networkService: NetworkServiceProtocol!
+    var location: Location?
+    
     required init(view: MapViewProtocol, networkService: NetworkServiceProtocol, location: Location?) {
-        <#code#>
+        self.view = view
+        self.networkService = networkService
+        self.location = location
     }
     
-    func setLocation() {
-        <#code#>
+    public func setLocation() {
+        self.view?.setLocation(location: location)
+    }
+    
+    func setTitle() {
+        self.view?.setTitle(title: location?.title)
     }
 }
