@@ -11,10 +11,19 @@ import MapKit
 
 class BreweryView: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var searchField: UITextField!
     var presenter: BreweriesViewPresenterProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let placeholder = NSMutableAttributedString()
+        let image = NSTextAttachment()
+        image.image = UIImage(systemName: "magnifyingglass")?.withTintColor(.lightGray)
+        placeholder.append(NSAttributedString(attachment: image))
+        placeholder.append(NSAttributedString(string: " Search"))
+        
+        searchField.attributedPlaceholder = placeholder
+
         tableView.register(UINib(nibName: "BreweryTableViewCell", bundle: nil),
                            forCellReuseIdentifier: "BreweryTableViewCell")
     }

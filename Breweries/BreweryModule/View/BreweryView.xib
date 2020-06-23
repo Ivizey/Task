@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BreweryView" customModule="Breweries" customModuleProvider="target">
             <connections>
+                <outlet property="searchField" destination="cuX-C0-sqK" id="DCN-JL-NsF"/>
                 <outlet property="tableView" destination="o23-dY-vzm" id="gw3-Kx-leU"/>
                 <outlet property="view" destination="iN0-l3-epB" id="WAB-X4-g5s"/>
             </connections>

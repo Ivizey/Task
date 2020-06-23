@@ -11,6 +11,8 @@ import UIKit
 class BreweryTableViewCell: UITableViewCell {
     @IBOutlet private weak var contentLabel: UILabel!
     @IBOutlet private weak var cellViewContent: UIView!
+    @IBOutlet private weak var stackView: UIStackView!
+    private let attribute = TextAttribute()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -18,58 +20,19 @@ class BreweryTableViewCell: UITableViewCell {
         cellViewContent.layer.borderColor = #colorLiteral(red: 0.2820236385, green: 0.6055960655, blue: 0.1114733592, alpha: 1)
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-    }
-    
     func setupCell(brewery: Brewery?) {
         guard let brewery = brewery else { return }
-        let charter = UIFontDescriptor(name: "Charter", size: 20)
-        
-        let titleAttributed: [NSAttributedString.Key: Any] = [
-            .font: UIFont(descriptor: charter, size: 20),
-            .foregroundColor: UIColor.darkGray]
-        
-        let subtitleAttributed: [NSAttributedString.Key: Any] = [
-            .font: UIFont(descriptor: charter, size: 14),
-            .foregroundColor: UIColor.darkGray]
-        
-        let descriptionAttributed: [NSAttributedString.Key: Any] = [
-            .font: UIFont(descriptor: charter, size: 14),
-            .foregroundColor: UIColor.lightGray]
-        
         let cellData = NSMutableAttributedString()
-        let name = NSAttributedString(string: brewery.name + "\n", attributes: titleAttributed)
-        let street = NSMutableAttributedString(string: "Street: ", attributes: descriptionAttributed)
-        street.append(NSAttributedString(string: brewery.street + "\n", attributes: subtitleAttributed))
-        let breweryType = NSMutableAttributedString(string: "Brewery type: ", attributes: descriptionAttributed)
-        breweryType.append(NSAttributedString(string: brewery.breweryType + "\n", attributes: subtitleAttributed))
-        let city = NSMutableAttributedString(string: "City: ", attributes: descriptionAttributed)
-        city.append(NSAttributedString(string: brewery.city + "\n", attributes: subtitleAttributed))
-        let state = NSMutableAttributedString(string: "State: ", attributes: descriptionAttributed)
-        state.append(NSAttributedString(string: brewery.state + "\n", attributes: subtitleAttributed))
-        let postalCode = NSMutableAttributedString(string: "Postal code: ", attributes: descriptionAttributed)
-        postalCode.append(NSAttributedString(string: brewery.postalCode + "\n", attributes: subtitleAttributed))
-        let country = NSMutableAttributedString(string: "Country: ", attributes: descriptionAttributed)
-        country.append(NSAttributedString(string: brewery.country + "\n", attributes: subtitleAttributed))
-        let phone = NSMutableAttributedString(string: "Phone: ", attributes: descriptionAttributed)
-        phone.append(NSAttributedString(string: brewery.phone + "\n", attributes: subtitleAttributed))
-        let websiteUrl = NSMutableAttributedString(string: "Website: ", attributes: descriptionAttributed)
-        websiteUrl.append(NSAttributedString(string: brewery.websiteUrl + "\n", attributes: subtitleAttributed))
-        let tagList = NSMutableAttributedString(string: "Tag: ", attributes: descriptionAttributed)
-        tagList.append(NSAttributedString(string: brewery.tagList.first ?? "", attributes: subtitleAttributed))
-        
-        cellData.append(name)
-        cellData.append(breweryType)
-        cellData.append(street)
-        cellData.append(city)
-        cellData.append(state)
-        cellData.append(postalCode)
-        cellData.append(country)
-        cellData.append(phone)
-        cellData.append(websiteUrl)
-        cellData.append(tagList)
+        cellData.append(attribute.setAttribute(for: .title(title: brewery.name, size: 20)))
+        cellData.append(attribute.setAttribute(for: .text(description: "Brewery type: ", text: brewery.breweryType)))
+        cellData.append(attribute.setAttribute(for: .text(description: "Street: ", text: brewery.street)))
+        cellData.append(attribute.setAttribute(for: .text(description: "City: ", text: brewery.city)))
+        cellData.append(attribute.setAttribute(for: .text(description: "State: ", text: brewery.state)))
+        cellData.append(attribute.setAttribute(for: .text(description: "Postal code: ", text: brewery.postalCode)))
+        cellData.append(attribute.setAttribute(for: .text(description: "Country: ", text: brewery.country)))
+        cellData.append(attribute.setAttribute(for: .text(description: "Phone: ", text: brewery.phone)))
+        cellData.append(attribute.setAttribute(for: .text(description: "Website: ", text: brewery.websiteUrl)))
+        cellData.append(attribute.setAttribute(for: .text(description: "Tag: ", text: brewery.tagList.first)))
         
         contentLabel.attributedText = cellData
     }

@@ -17,8 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
+        let charter = UIFontDescriptor(name: "Charter", size: 24)
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Charter", size: 24) ?? UIFont.systemFont(ofSize: 24),
+            .font: UIFont(descriptor: charter, size: 24),
             .foregroundColor: UIColor.white,
         ]
         
