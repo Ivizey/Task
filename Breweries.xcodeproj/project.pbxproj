@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,10 +27,10 @@
 		47B53F2F249A01EA0056EF6F /* BreweryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47B53F2E249A01EA0056EF6F /* BreweryView.xib */; };
 		47B53F33249A02DB0056EF6F /* MapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B53F32249A02DB0056EF6F /* MapPresenter.swift */; };
 		47B53F35249A053B0056EF6F /* AsselderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B53F34249A053B0056EF6F /* AsselderBuilder.swift */; };
-		47B53F37249A08F80056EF6F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B53F36249A08F80056EF6F /* Network.swift */; };
 		47B53F39249A0F950056EF6F /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47B53F38249A0F950056EF6F /* MapView.xib */; };
 		47B53F3F249A4B8B0056EF6F /* BreweryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B53F3D249A4B8B0056EF6F /* BreweryTableViewCell.swift */; };
 		47B53F40249A4B8B0056EF6F /* BreweryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47B53F3E249A4B8B0056EF6F /* BreweryTableViewCell.xib */; };
+		4A68BF5058FFE68A7935E6B6 /* Pods_Breweries.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED57FABFEF99F6B8EE070B8 /* Pods_Breweries.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,10 +56,10 @@
 		47B53F2E249A01EA0056EF6F /* BreweryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BreweryView.xib; sourceTree = "<group>"; };
 		47B53F32249A02DB0056EF6F /* MapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPresenter.swift; sourceTree = "<group>"; };
 		47B53F34249A053B0056EF6F /* AsselderBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsselderBuilder.swift; sourceTree = "<group>"; };
-		47B53F36249A08F80056EF6F /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		47B53F38249A0F950056EF6F /* MapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapView.xib; sourceTree = "<group>"; };
 		47B53F3D249A4B8B0056EF6F /* BreweryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreweryTableViewCell.swift; sourceTree = "<group>"; };
 		47B53F3E249A4B8B0056EF6F /* BreweryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BreweryTableViewCell.xib; sourceTree = "<group>"; };
+		4ED57FABFEF99F6B8EE070B8 /* Pods_Breweries.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Breweries.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D59E50BD694652A606A86AC6 /* Pods-Breweries.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breweries.debug.xcconfig"; path = "Target Support Files/Pods-Breweries/Pods-Breweries.debug.xcconfig"; sourceTree = "<group>"; };
 		F493A0FA70DAD989DEAEA9C8 /* Pods-Breweries.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breweries.release.xcconfig"; path = "Target Support Files/Pods-Breweries/Pods-Breweries.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,12 +69,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A68BF5058FFE68A7935E6B6 /* Pods_Breweries.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16A6E89FF381BD0D5B43A653 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4ED57FABFEF99F6B8EE070B8 /* Pods_Breweries.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4740A5DD244D98C800E5BAA1 /* TableVIewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +127,7 @@
 				47688587244753EF006F14AF /* Breweries */,
 				47688586244753EF006F14AF /* Products */,
 				84471AB4FB9FC328684295C8 /* Pods */,
+				16A6E89FF381BD0D5B43A653 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,7 +144,6 @@
 			children = (
 				47688588244753EF006F14AF /* AppDelegate.swift */,
 				4768858A244753EF006F14AF /* SceneDelegate.swift */,
-				47B53F36249A08F80056EF6F /* Network.swift */,
 				474696E4249E1A210086B9B0 /* TextAttribute.swift */,
 				47B53F3A249A3C6E0056EF6F /* Builder */,
 				47B53F2C2499F8760056EF6F /* Router */,
@@ -248,6 +257,7 @@
 				47688581244753EF006F14AF /* Sources */,
 				47688582244753EF006F14AF /* Frameworks */,
 				47688583244753EF006F14AF /* Resources */,
+				4EF50916C0A31202D1AF214B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -330,6 +340,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4EF50916C0A31202D1AF214B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Breweries/Pods-Breweries-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Breweries/Pods-Breweries-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Breweries/Pods-Breweries-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -347,7 +374,6 @@
 				47B53F292499F7720056EF6F /* BreweryPresenter.swift in Sources */,
 				47636830244E17CF00D477C1 /* RealmDescribing.swift in Sources */,
 				47B53F33249A02DB0056EF6F /* MapPresenter.swift in Sources */,
-				47B53F37249A08F80056EF6F /* Network.swift in Sources */,
 				4768859D2447561D006F14AF /* BreweryModel.swift in Sources */,
 				47B53F2B2499F8720056EF6F /* Router.swift.swift in Sources */,
 				4763682E244E174D00D477C1 /* BreweriesRepository.swift in Sources */,

@@ -14,7 +14,7 @@ protocol BreweriesViewProtocol: class {
 }
 
 protocol BreweriesViewPresenterProtocol: class {
-    init(view: BreweriesViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
+    init(view: BreweriesViewProtocol, networkService: BreweriesRepositoryImpl, router: RouterProtocol)
     func getBreweries()
     var breweries: [Brewery]? { get set }
     func tapOnTheItem(location: Location?)
@@ -22,11 +22,11 @@ protocol BreweriesViewPresenterProtocol: class {
 
 class BreweriesPresenter: BreweriesViewPresenterProtocol{
     weak var view: BreweriesViewProtocol?
-    let networkService: NetworkServiceProtocol!
+    let networkService: BreweriesRepositoryImpl!
     var router: RouterProtocol?
     var breweries: [Brewery]?
     
-    required init(view: BreweriesViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
+    required init(view: BreweriesViewProtocol, networkService: BreweriesRepositoryImpl, router: RouterProtocol) {
         self.view = view
         self.networkService = networkService
         self.router = router
@@ -34,16 +34,11 @@ class BreweriesPresenter: BreweriesViewPresenterProtocol{
     }
     
     func getBreweries() {
-        networkService.fetchNewsFeed { [weak self] result in
+        networkService.fetchBrewery(search: nil) { [weak self] breweries in
             DispatchQueue.main.async {
                 guard let self = self else { return }
-                switch result {
-                case .success(let brewery):
-                    self.breweries = brewery
-                    self.view?.succes()
-                case .failure(let error):
-                    self.view?.failure(error: error)
-                }
+                self.breweries = breweries
+                self.view?.succes()
             }
         }
     }

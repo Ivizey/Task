@@ -17,7 +17,7 @@ class AsselderModuleBuilder: AsselderBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController {
         let view = BreweryView()
         view.title = "Breweries"
-        let networkService = NetworkService()
+        let networkService = BreweriesRepositoryImpl.makeDefault()
         let presenter = BreweriesPresenter(view: view, networkService: networkService, router: router)
         view.presenter = presenter
         return view
@@ -25,7 +25,7 @@ class AsselderModuleBuilder: AsselderBuilderProtocol {
     
     func createMapModule(location: Location?, router: RouterProtocol) -> UIViewController {
         let view = MapView()
-        let networkService = NetworkService()
+        let networkService = BreweriesRepositoryImpl.makeDefault()
         let presenter = MapPresenter(view: view, networkService: networkService, location: location)
         view.presenter = presenter
         return view

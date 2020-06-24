@@ -14,17 +14,17 @@ protocol MapViewProtocol: class {
 }
 
 protocol MapViewPresenterProtocol: class {
-    init(view: MapViewProtocol, networkService: NetworkServiceProtocol, location: Location?)
+    init(view: MapViewProtocol, networkService: BreweriesRepositoryImpl, location: Location?)
     func setLocation()
     func setTitle()
 }
 
 class MapPresenter: MapViewPresenterProtocol {
     weak var view: MapViewProtocol?
-    let networkService: NetworkServiceProtocol!
+    let networkService: BreweriesRepositoryImpl!
     var location: Location?
     
-    required init(view: MapViewProtocol, networkService: NetworkServiceProtocol, location: Location?) {
+    required init(view: MapViewProtocol, networkService: BreweriesRepositoryImpl, location: Location?) {
         self.view = view
         self.networkService = networkService
         self.location = location
