@@ -19,8 +19,8 @@ public final class Brewery: Object, Codable {
     dynamic var state: String? = nil
     dynamic var postalCode: String? = nil
     dynamic var country: String? = nil
-    let longitude = RealmOptional<Double>()
-    let latitude = RealmOptional<Double>()
+    dynamic var longitude: String? = nil
+    dynamic var latitude: String? = nil
     dynamic var phone: String? = nil
     dynamic var websiteUrl: String? = nil
     dynamic var updatedAt: String? = nil
@@ -59,10 +59,8 @@ public final class Brewery: Object, Codable {
         self.state = try? container.decode(String.self, forKey: .state)
         self.postalCode = try? container.decode(String.self, forKey: .postalCode)
         self.country = try? container.decode(String.self, forKey: .country)
-//        self.longitude = RealmOptional(Double(try container.decode(String.self, forKey: .longitude)))
-//        self.latitude = try container.decode(String.self, forKey: .latitude)
-        let longitude = try? RealmOptional(Double(container.decode(String.self, forKey: .longitude)))
-        self.longitude = longitude?.value
+        self.longitude = try? container.decode(String.self, forKey: .longitude)
+        self.latitude = try? container.decode(String.self, forKey: .latitude)
         self.phone = try? container.decode(String.self, forKey: .phone)
         self.websiteUrl = try? container.decode(String.self, forKey: .websiteUrl)
         self.updatedAt = try? container.decode(String.self, forKey: .updatedAt)
