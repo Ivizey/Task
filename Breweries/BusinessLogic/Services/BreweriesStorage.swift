@@ -1,5 +1,5 @@
 //
-//  BreweryDB.swift
+//  BreweriesStorage.swift
 //  Breweries
 //
 //  Created by Pavel Bondar on 18.04.2020.
@@ -8,91 +8,22 @@
 import Foundation
 import RealmSwift
 
-@objcMembers
-class BreweryRealm: Object {
-    dynamic var id = Int()
-    dynamic var name = String()
-    dynamic var breweryType = String()
-    dynamic var street = String()
-    dynamic var city = String()
-    dynamic var state = String()
-    dynamic var postalCode = String()
-    dynamic var country = String()
-    dynamic var longitude = Double()
-    dynamic var latitude = Double()
-    dynamic var phone = String()
-    dynamic var websiteUrl = String()
-    dynamic var updatedAt = String()
-    let tagList = List<String>()
-}
-
 protocol BreweriesStorage: class {
-    func save(brewery: BreweryRealm)
-    func obtainBrewery() -> [Brewery]
-    func saveBrewerys(brewery: [Brewery]) -> [Brewery]
-    func clearAll()
+    func cache(_ objects: [Object])
+    func retrieveObjects<T: Object>(by type: T.Type) -> [T]
 }
 
 class BreweriesStorageImpl: BreweriesStorage {
-    lazy var mainRealm: RealmDescribing =  {
-        let config = Realm.Configuration(schemaVersion: 2)
-        Realm.Configuration.defaultConfiguration = config
-        return try! Realm(configuration: .defaultConfiguration)
-    }()
-    
-    func save(brewery: BreweryRealm) {
-        do {
-            try mainRealm.write {
-                mainRealm.add(brewery)
-            }
-        } catch {
-            print("Error: \(error.localizedDescription)")
+    // Store objects to Realm data base
+    func cache(_ objects: [Object]) {
+        let realm = try! Realm()
+        try? realm.write{
+            realm.add(objects, update: .all)
         }
     }
-    
-    func clearAll() {
-        if obtainBrewery().isEmpty {
-            print("Error: DB is empty!")
-        } else {
-            do {
-                try mainRealm.write {
-                    mainRealm.deleteAll()
-                }
-            } catch {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func saveBrewerys(brewery: [Brewery]) -> [Brewery] {
-        brewery.forEach {
-            let breweryRealm = BreweryRealm(value: [$0])
-            self.save(brewery: breweryRealm)
-        }
-        return obtainBrewery()
-    }
-    
-    func obtainBrewery() -> [Brewery] {
-        let models = mainRealm.objects(BreweryRealm.self)
-        var breweries = [Brewery]()
-        models.forEach {
-            let brewery = Brewery(
-                id: $0.id,
-                name: $0.name,
-                breweryType: $0.breweryType,
-                street: $0.street,
-                city: $0.city,
-                state: $0.state,
-                postalCode: $0.postalCode,
-                country: $0.country,
-                longitude: $0.longitude,
-                latitude: $0.latitude,
-                phone: $0.phone,
-                websiteUrl: $0.websiteUrl,
-                updatedAt: $0.updatedAt,
-                tagList: Array($0.tagList))
-            breweries.append(brewery)
-        }
-        return Array(breweries)
+    // Fetch data from Realm data base
+    func retrieveObjects<T>(by type: T.Type) -> [T] where T : Object {
+        let realm = try! Realm()
+        return Array(realm.objects(type))
     }
 }

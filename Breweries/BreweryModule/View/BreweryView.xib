@@ -34,6 +34,9 @@
                             <rect key="frame" x="10" y="8" width="394" height="34"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="searchFieldAction:" destination="-1" eventType="editingChanged" id="HD1-n1-g9A"/>
+                            </connections>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" red="0.28202363850000001" green="0.6055960655" blue="0.1114733592" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

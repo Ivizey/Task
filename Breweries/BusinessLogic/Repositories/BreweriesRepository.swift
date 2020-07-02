@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 typealias BrewerysRepositoryFetchHandler = ([Brewery]) -> ()
 
@@ -34,17 +35,17 @@ class BreweriesRepositoryImpl: BreweriesRepository {
                 completionHandler([])
                 return
             }
-            
+
             switch result {
             case .failure:
-                completionHandler(storage.obtainBrewery())
+                completionHandler(storage.retrieveObjects(by: Brewery.self))
             case .success(let data):
                 guard let breweries = try? decoder.decode([Brewery].self, from: data) else {
                     completionHandler([])
                     return
                 }
-                storage.clearAll()
-                completionHandler(storage.saveBrewerys(brewery: breweries))
+//                storage.cache(breweries)
+                completionHandler(breweries)
             }
         }
     }

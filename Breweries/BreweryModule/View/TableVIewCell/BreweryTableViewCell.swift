@@ -23,7 +23,7 @@ class BreweryTableViewCell: UITableViewCell {
     func setupCell(brewery: Brewery?) {
         guard let brewery = brewery else { return }
         let cellData = NSMutableAttributedString()
-        cellData.append(attribute.setAttribute(for: .title(title: brewery.name, size: 20)))
+        cellData.append(attribute.setAttribute(for: .title(title: brewery.name ?? "", size: 20)))
         cellData.append(attribute.setAttribute(for: .text(description: "Brewery type: ", text: brewery.breweryType)))
         cellData.append(attribute.setAttribute(for: .text(description: "Street: ", text: brewery.street)))
         cellData.append(attribute.setAttribute(for: .text(description: "City: ", text: brewery.city)))

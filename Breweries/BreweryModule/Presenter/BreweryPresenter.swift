@@ -15,7 +15,7 @@ protocol BreweriesViewProtocol: class {
 
 protocol BreweriesViewPresenterProtocol: class {
     init(view: BreweriesViewProtocol, networkService: BreweriesRepositoryImpl, router: RouterProtocol)
-    func getBreweries()
+    func getBreweries(search: String?)
     var breweries: [Brewery]? { get set }
     func tapOnTheItem(location: Location?)
 }
@@ -30,11 +30,11 @@ class BreweriesPresenter: BreweriesViewPresenterProtocol{
         self.view = view
         self.networkService = networkService
         self.router = router
-        getBreweries()
+        getBreweries(search: nil)
     }
     
-    func getBreweries() {
-        networkService.fetchBrewery(search: nil) { [weak self] breweries in
+    func getBreweries(search: String?) {
+        networkService.fetchBrewery(search: search) { [weak self] breweries in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 self.breweries = breweries

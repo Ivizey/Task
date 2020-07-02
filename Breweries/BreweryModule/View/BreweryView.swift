@@ -12,6 +12,7 @@ import MapKit
 class BreweryView: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var searchField: UITextField!
+    private var timer: Timer?
     var presenter: BreweriesViewPresenterProtocol!
     
     override func viewDidLoad() {
@@ -26,6 +27,12 @@ class BreweryView: UIViewController {
 
         tableView.register(UINib(nibName: "BreweryTableViewCell", bundle: nil),
                            forCellReuseIdentifier: "BreweryTableViewCell")
+    }
+    @IBAction func searchFieldAction(_ sender: UITextField) {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+            self.presenter.getBreweries(search: sender.text ?? "")
+        })
     }
 }
 
@@ -48,8 +55,8 @@ extension BreweryView: UITableViewDelegate {
         let location = Location(title: brewery?.name,
                                 locationName: brewery?.city,
                                 coordinate: CLLocationCoordinate2D(
-                                    latitude: brewery?.latitude ?? 0,
-                                    longitude: brewery?.longitude ?? 0
+                                    latitude: 0.0,
+                                    longitude: 0.0
             )
         )
         presenter.tapOnTheItem(location: location)
