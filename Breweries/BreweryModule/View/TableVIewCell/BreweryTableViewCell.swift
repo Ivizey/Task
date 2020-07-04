@@ -25,12 +25,16 @@ class BreweryTableViewCell: UITableViewCell {
         let cellData = NSMutableAttributedString()
         cellData.append(attribute.setAttribute(for: .title(title: brewery.name ?? "", size: 20)))
         cellData.append(attribute.setAttribute(for: .text(description: "Brewery type: ", text: brewery.breweryType)))
-        cellData.append(attribute.setAttribute(for: .text(description: "Street: ", text: brewery.street)))
+        if brewery.street?.count ?? 0 > 0 {
+            cellData.append(attribute.setAttribute(for: .text(description: "Street: ", text: brewery.street)))
+        }
         cellData.append(attribute.setAttribute(for: .text(description: "City: ", text: brewery.city)))
         cellData.append(attribute.setAttribute(for: .text(description: "State: ", text: brewery.state)))
         cellData.append(attribute.setAttribute(for: .text(description: "Postal code: ", text: brewery.postalCode)))
         cellData.append(attribute.setAttribute(for: .text(description: "Country: ", text: brewery.country)))
-        cellData.append(attribute.setAttribute(for: .text(description: "Phone: ", text: brewery.phone)))
+        if brewery.phone?.count ?? 0 > 0 {
+            cellData.append(attribute.setAttribute(for: .text(description: "Phone: ", text: brewery.phone)))
+        }
         cellData.append(attribute.setAttribute(for: .text(description: "Website: ", text: brewery.websiteUrl)))
         cellData.append(attribute.setAttribute(for: .text(description: "Tag: ", text: brewery.tagList.first)))
         

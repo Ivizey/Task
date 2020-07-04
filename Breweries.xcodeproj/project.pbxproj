@@ -34,7 +34,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		473B486024AB31A200245991 /* URLSessionTestNil.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = URLSessionTestNil.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4740A5D7244B495400E5BAA1 /* BreweriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreweriesStorage.swift; sourceTree = "<group>"; };
 		474696E4249E1A210086B9B0 /* TextAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAttribute.swift; sourceTree = "<group>"; };
 		4755C55624AA0A5400A98EB4 /* Brewery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brewery.swift; sourceTree = "<group>"; };
@@ -125,7 +124,6 @@
 		4768857C244753EF006F14AF = {
 			isa = PBXGroup;
 			children = (
-				473B486024AB31A200245991 /* URLSessionTestNil.playground */,
 				47688587244753EF006F14AF /* Breweries */,
 				47688586244753EF006F14AF /* Products */,
 				84471AB4FB9FC328684295C8 /* Pods */,
