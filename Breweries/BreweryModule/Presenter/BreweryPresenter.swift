@@ -18,6 +18,7 @@ protocol BreweriesViewPresenterProtocol: class {
     func getBreweries(search: String?)
     var breweries: [Brewery]? { get set }
     func tapOnTheItem(location: Location?)
+    func setSearchPlaceholder() -> NSMutableAttributedString
 }
 
 class BreweriesPresenter: BreweriesViewPresenterProtocol{
@@ -25,6 +26,7 @@ class BreweriesPresenter: BreweriesViewPresenterProtocol{
     let networkService: BreweriesRepositoryImpl!
     var router: RouterProtocol?
     var breweries: [Brewery]?
+    let attribute = TextAttribute()
     
     required init(view: BreweriesViewProtocol, networkService: BreweriesRepositoryImpl, router: RouterProtocol) {
         self.view = view
@@ -45,5 +47,9 @@ class BreweriesPresenter: BreweriesViewPresenterProtocol{
     
     func tapOnTheItem(location: Location?) {
         router?.showMap(location: location)
+    }
+    
+    func setSearchPlaceholder() -> NSMutableAttributedString {
+        return attribute.setSearchPlaceholder()
     }
 }

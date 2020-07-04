@@ -17,14 +17,8 @@ class BreweryView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let placeholder = NSMutableAttributedString()
-        let image = NSTextAttachment()
-        image.image = UIImage(systemName: "magnifyingglass")?.withTintColor(.lightGray)
-        placeholder.append(NSAttributedString(attachment: image))
-        placeholder.append(NSAttributedString(string: " Search"))
         
-        searchField.attributedPlaceholder = placeholder
-
+        searchField.attributedPlaceholder = presenter.setSearchPlaceholder()
         tableView.register(UINib(nibName: "BreweryTableViewCell", bundle: nil),
                            forCellReuseIdentifier: "BreweryTableViewCell")
     }
@@ -68,7 +62,9 @@ extension BreweryView: UITableViewDelegate {
 extension BreweryView: BreweriesViewProtocol {
     func succes() {
         tableView.reloadData()
-        tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+        if presenter.breweries?.count ?? 0 > 0  {
+            tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+        }
     }
     
     func failure(error: Error) {

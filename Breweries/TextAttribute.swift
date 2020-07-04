@@ -43,4 +43,13 @@ class TextAttribute: TextAttributeProtocol {
             return textWithDescription
         }
     }
+    
+    func setSearchPlaceholder() -> NSMutableAttributedString {
+        let placeholder = NSMutableAttributedString()
+        let image = NSTextAttachment()
+        image.image = UIImage(systemName: "magnifyingglass")?.withTintColor(.lightGray)
+        placeholder.append(NSAttributedString(attachment: image))
+        placeholder.append(NSAttributedString(string: " Search"))
+        return placeholder
+    }
 }
