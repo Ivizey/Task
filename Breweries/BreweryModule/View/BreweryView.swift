@@ -43,22 +43,6 @@ extension BreweryView: UITableViewDataSource {
     }
 }
 
-extension BreweryView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let brewery = presenter.breweries?[indexPath.row]
-        guard let latitude = Double(String(brewery?.latitude ?? "0.0")) else { return }
-        guard let longitude = Double(String(brewery?.longitude ?? "0.0")) else { return }
-        let location = Location(title: brewery?.name,
-                                locationName: brewery?.city,
-                                coordinate: CLLocationCoordinate2D(
-                                    latitude: latitude,
-                                    longitude: longitude
-            )
-        )
-        presenter.tapOnTheItem(location: location)
-    }
-}
-
 extension BreweryView: BreweriesViewProtocol {
     func succes() {
         tableView.reloadData()
