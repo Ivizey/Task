@@ -44,7 +44,7 @@ class BreweriesRepositoryImpl: BreweriesRepository {
                     completionHandler([])
                     return
                 }
-//                storage.cache(breweries)
+//                breweries.forEach { storage.cache($0) }
                 completionHandler(breweries)
             }
         }

@@ -25,7 +25,7 @@ class BreweryView: UIViewController {
     @IBAction func searchFieldAction(_ sender: UITextField) {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-            self.presenter.getBreweries(search: sender.text ?? "")
+            self.presenter.getBreweries(search: sender.text ?? nil) 
         })
     }
 }
@@ -38,24 +38,8 @@ extension BreweryView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BreweryTableViewCell", for: indexPath) as! BreweryTableViewCell
         let brewery = presenter.breweries?[indexPath.row]
-        cell.setupCell(brewery: brewery)
+        cell.brewery = brewery
         return cell
-    }
-}
-
-extension BreweryView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let brewery = presenter.breweries?[indexPath.row]
-        guard let latitude = Double(String(brewery?.latitude ?? "0.0")) else { return }
-        guard let longitude = Double(String(brewery?.longitude ?? "0.0")) else { return }
-        let location = Location(title: brewery?.name,
-                                locationName: brewery?.city,
-                                coordinate: CLLocationCoordinate2D(
-                                    latitude: latitude,
-                                    longitude: longitude
-            )
-        )
-        presenter.tapOnTheItem(location: location)
     }
 }
 
