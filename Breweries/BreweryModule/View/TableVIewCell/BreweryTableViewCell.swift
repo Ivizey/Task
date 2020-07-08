@@ -39,7 +39,6 @@ class BreweryTableViewCell: UITableViewCell {
         cellData.append(attribute.setText(description: "Country: ", text: brewery.country))
         cellData.append(attribute.setText(description: "Phone: ", text: brewery.phone))
         cellData.append(attribute.setText(description: "Tag: ", text: brewery.tagList.first))
-        
         contentLabel.attributedText = cellData
         
         if brewery.websiteUrl == nil || brewery.websiteUrl?.count ?? 0 <= 0 {
@@ -47,7 +46,8 @@ class BreweryTableViewCell: UITableViewCell {
             stackView.removeArrangedSubview(linkButton)
         } else {
             linkButton.isHidden = false
-            linkButton.linkButton.setTitle(brewery.websiteUrl, for: .normal)
+            linkButton.linkButton.setAttributedTitle(attribute.setButtonTitle(title: brewery.websiteUrl!),
+                                                     for: .normal)
             stackView.addArrangedSubview(linkButton)
         }
         

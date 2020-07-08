@@ -49,6 +49,15 @@ class TextAttribute: TextAttributeProtocol {
         return textWithDescription
     }
     
+    func setButtonTitle(title: String) -> NSAttributedString {
+        let buttonAttributed: [NSAttributedString.Key: Any] = [
+            .font: UIFont(descriptor: charter, size: 14),
+            .foregroundColor: UIColor.darkGray,
+            .underlineStyle: NSUnderlineStyle.single.rawValue]
+        
+        return NSAttributedString(string: title, attributes: buttonAttributed)
+    }
+    
     func setSearchPlaceholder() -> NSMutableAttributedString {
         let placeholder = NSMutableAttributedString()
         let image = NSTextAttachment()
