@@ -25,7 +25,7 @@ class BreweryView: UIViewController {
     @IBAction func searchFieldAction(_ sender: UITextField) {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-            self.presenter.getBreweries(search: sender.text ?? "")
+            self.presenter.getBreweries(search: sender.text ?? nil) 
         })
     }
 }
@@ -38,7 +38,7 @@ extension BreweryView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BreweryTableViewCell", for: indexPath) as! BreweryTableViewCell
         let brewery = presenter.breweries?[indexPath.row]
-        cell.setupCell(brewery: brewery)
+        cell.brewery = brewery
         return cell
     }
 }

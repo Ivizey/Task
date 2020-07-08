@@ -8,40 +8,45 @@
 
 import UIKit
 
-enum TextAttributeFor {
-    case title(title: String, size: CGFloat)
-    case text (description: String, text: String?)
-}
-
 protocol TextAttributeProtocol {
-    func setAttribute(for: TextAttributeFor) -> NSAttributedString
+    func setTitle(title: String?, size: CGFloat) -> NSAttributedString
+    func setText(description: String, text: String?) -> NSAttributedString
 }
 
 class TextAttribute: TextAttributeProtocol {
     let charter = UIFontDescriptor(name: "Charter", size: 20)
+    let paragraphStyle = NSMutableParagraphStyle()
     
-    func setAttribute(for: TextAttributeFor) -> NSAttributedString {
-        switch `for` {
-        case .title(let title, let size):
-            let titleAttributed: [NSAttributedString.Key: Any] = [
-                .font: UIFont(descriptor: charter, size: size),
-                .foregroundColor: UIColor.darkGray]
-            return NSAttributedString(string: title + "\n", attributes: titleAttributed)
-        case .text(let description, let text):
-            guard let text = text else { return NSMutableAttributedString() }
-            let subtitleAttributed: [NSAttributedString.Key: Any] = [
-                .font: UIFont(descriptor: charter, size: 14),
-                .foregroundColor: UIColor.darkGray]
-            
-            let descriptionAttributed: [NSAttributedString.Key: Any] = [
-                .font: UIFont(descriptor: charter, size: 14),
-                .foregroundColor: UIColor.lightGray]
-            
-            let textWithDescription = NSMutableAttributedString(string: description, attributes: descriptionAttributed)
-            textWithDescription.append(NSAttributedString(string: text + "\n", attributes: subtitleAttributed))
-            
-            return textWithDescription
+    func setTitle(title: String?, size: CGFloat) -> NSAttributedString {
+        guard let title = title else { return NSAttributedString() }
+        paragraphStyle.lineSpacing = 5
+        let titleAttributed: [NSAttributedString.Key: Any] = [
+            .paragraphStyle: paragraphStyle,
+            .font: UIFont(descriptor: charter, size: size),
+            .foregroundColor: UIColor.darkGray]
+        return NSAttributedString(string: title + "\n", attributes: titleAttributed)
+    }
+    
+    func setText(description: String, text: String?) -> NSAttributedString {
+        guard let text = text else { return NSMutableAttributedString() }
+        if text.count <= 0 {
+            return NSMutableAttributedString()
         }
+        paragraphStyle.lineSpacing = 5
+        let subtitleAttributed: [NSAttributedString.Key: Any] = [
+            .paragraphStyle: paragraphStyle,
+            .font: UIFont(descriptor: charter, size: 14),
+            .foregroundColor: UIColor.darkGray]
+        
+        let descriptionAttributed: [NSAttributedString.Key: Any] = [
+            .paragraphStyle: paragraphStyle,
+            .font: UIFont(descriptor: charter, size: 14),
+            .foregroundColor: UIColor.lightGray]
+        
+        let textWithDescription = NSMutableAttributedString(string: description, attributes: descriptionAttributed)
+        textWithDescription.append(NSAttributedString(string: text + "\n", attributes: subtitleAttributed))
+        
+        return textWithDescription
     }
     
     func setSearchPlaceholder() -> NSMutableAttributedString {
