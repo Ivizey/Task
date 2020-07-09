@@ -8,10 +8,16 @@
 
 import UIKit
 
+protocol CellSubclassDelegate: class {
+    func linkButtonTapped(cell: BreweryTableViewCell, url: URL)
+    func mapButtonTapped(cell: BreweryTableViewCell, location: Location)
+}
+
 class BreweryTableViewCell: UITableViewCell {
     @IBOutlet private weak var contentLabel: UILabel!
     @IBOutlet private weak var cellViewContent: UIView!
     @IBOutlet private weak var stackView: UIStackView!
+    weak var delegate: CellSubclassDelegate?
     private let attribute = TextAttribute()
     private let mapButton = MapButton()
     private let linkButton = LinkButton()
@@ -23,8 +29,12 @@ class BreweryTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         cellViewContent.layer.borderColor = #colorLiteral(red: 0.2820236385, green: 0.6055960655, blue: 0.1114733592, alpha: 1)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.delegate = nil
     }
     
     func setupCell(brewery: Brewery?) {
@@ -46,8 +56,8 @@ class BreweryTableViewCell: UITableViewCell {
             stackView.removeArrangedSubview(linkButton)
         } else {
             linkButton.isHidden = false
-            linkButton.linkButton.setAttributedTitle(attribute.setButtonTitle(title: brewery.websiteUrl!),
-                                                     for: .normal)
+            linkButton.linkButton.setAttributedTitle(attribute.setButtonTitle(title: brewery.websiteUrl!), for: .normal)
+            linkButton.linkButton.addTarget(self, action: #selector(linkButtonTapped), for: .touchUpInside)
             stackView.addArrangedSubview(linkButton)
         }
         
@@ -56,7 +66,29 @@ class BreweryTableViewCell: UITableViewCell {
             stackView.removeArrangedSubview(mapButton)
         } else {
             mapButton.isHidden = false
+            mapButton.showMapButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
             stackView.addArrangedSubview(mapButton)
         }
+    }
+    
+    @objc func linkButtonTapped(sender: UIButton) {
+        guard let webURL = brewery?.websiteUrl else { return }
+        if let url = URL(string: webURL) {
+            self.delegate?.linkButtonTapped(cell: self, url: url)
+        }
+    }
+    
+    @objc func mapButtonTapped(sender: UIButton) {
+        guard let title = brewery?.name,
+            let locationName = brewery?.street,
+            let latitude = brewery?.latitude,
+            let longitude = brewery?.longitude
+            else { return }
+        
+        let location = Location(title: title,
+                                locationName: locationName,
+                                latitude: latitude,
+                                longitude: longitude)
+        self.delegate?.mapButtonTapped(cell: self, location: location)
     }
 }

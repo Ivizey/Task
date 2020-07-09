@@ -38,6 +38,7 @@ extension BreweryView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BreweryTableViewCell", for: indexPath) as! BreweryTableViewCell
         let brewery = presenter.breweries?[indexPath.row]
+        cell.delegate = self
         cell.brewery = brewery
         return cell
     }
@@ -53,5 +54,15 @@ extension BreweryView: BreweriesViewProtocol {
     
     func failure(error: Error) {
         print(error.localizedDescription)
+    }
+}
+
+extension BreweryView: CellSubclassDelegate {
+    func linkButtonTapped(cell: BreweryTableViewCell, url: URL) {
+        presenter.openBrowser(url: url)
+    }
+    
+    func mapButtonTapped(cell: BreweryTableViewCell, location: Location) {
+        presenter.openMapView(location: location)
     }
 }
