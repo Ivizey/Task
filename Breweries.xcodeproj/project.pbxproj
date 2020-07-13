@@ -140,6 +140,33 @@
 			path = LinkButton;
 			sourceTree = "<group>";
 		};
+		47431CB224BC35910058B66E /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				47688588244753EF006F14AF /* AppDelegate.swift */,
+				4768858A244753EF006F14AF /* SceneDelegate.swift */,
+				47688596244753F5006F14AF /* Info.plist */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		47431CB324BC35BB0058B66E /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4768858E244753EF006F14AF /* Main.storyboard */,
+				47688593244753F5006F14AF /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		47431CB424BC36180058B66E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				47688591244753F5006F14AF /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		47470B4B24B30AC400789988 /* MapButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,18 +197,15 @@
 		47688587244753EF006F14AF /* Breweries */ = {
 			isa = PBXGroup;
 			children = (
-				47688588244753EF006F14AF /* AppDelegate.swift */,
-				4768858A244753EF006F14AF /* SceneDelegate.swift */,
+				47431CB224BC35910058B66E /* Application */,
 				474696E4249E1A210086B9B0 /* TextAttribute.swift */,
 				47B53F3A249A3C6E0056EF6F /* Builder */,
 				47B53F2C2499F8760056EF6F /* Router */,
 				47B53F262499F6B80056EF6F /* BreweryModule */,
 				47B53F2D249A01A10056EF6F /* MapModule */,
 				4740A5DF244D993C00E5BAA1 /* BusinessLogic */,
-				4768858E244753EF006F14AF /* Main.storyboard */,
-				47688591244753F5006F14AF /* Assets.xcassets */,
-				47688593244753F5006F14AF /* LaunchScreen.storyboard */,
-				47688596244753F5006F14AF /* Info.plist */,
+				47431CB324BC35BB0058B66E /* Storyboards */,
+				47431CB424BC36180058B66E /* Resources */,
 			);
 			path = Breweries;
 			sourceTree = "<group>";
@@ -559,7 +583,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z67C29K2Q6;
-				INFOPLIST_FILE = Breweries/Info.plist;
+				INFOPLIST_FILE = Breweries/Application/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -578,7 +602,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z67C29K2Q6;
-				INFOPLIST_FILE = Breweries/Info.plist;
+				INFOPLIST_FILE = Breweries/Application/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
