@@ -17,11 +17,12 @@ protocol BreweriesViewPresenterProtocol: class {
     init(view: BreweriesViewProtocol, networkService: BreweriesRepositoryImpl, router: RouterProtocol)
     func getBreweries(search: String?)
     var breweries: [Brewery]? { get set }
-    func tapOnTheItem(location: Location?)
+    func openMapView(location: Location?)
+    func openBrowser(url: URL)
     func setSearchPlaceholder() -> NSMutableAttributedString
 }
 
-class BreweriesPresenter: BreweriesViewPresenterProtocol{
+class BreweriesPresenter: BreweriesViewPresenterProtocol {
     weak var view: BreweriesViewProtocol?
     let networkService: BreweriesRepositoryImpl!
     var router: RouterProtocol?
@@ -42,11 +43,15 @@ class BreweriesPresenter: BreweriesViewPresenterProtocol{
                 self.breweries = breweries
                 self.view?.succes()
             }
-        }
+        }   
     }
     
-    func tapOnTheItem(location: Location?) {
+    func openMapView(location: Location?) {
         router?.showMap(location: location)
+    }
+    
+    func openBrowser(url: URL) {
+        router?.openBrowser(url: url)
     }
     
     func setSearchPlaceholder() -> NSMutableAttributedString {

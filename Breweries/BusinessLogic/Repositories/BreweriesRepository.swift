@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 typealias BrewerysRepositoryFetchHandler = ([Brewery]) -> ()
 
@@ -44,7 +43,6 @@ class BreweriesRepositoryImpl: BreweriesRepository {
                     completionHandler([])
                     return
                 }
-//                breweries.forEach { storage.cache($0) }
                 completionHandler(breweries)
             }
         }
