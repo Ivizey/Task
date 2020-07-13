@@ -9,16 +9,16 @@ import Foundation
 import RealmSwift
 
 protocol BreweriesStorage: class {
-    func cache(_ objects: Object)
+    func cache(_ objects: [Object])
     func retrieveObjects<T: Object>(by type: T.Type) -> [T]
 }
 
 class BreweriesStorageImpl: BreweriesStorage {
     // Store objects to Realm data base
-    func cache(_ objects: Object) {
+    func cache(_ objects: [Object]) {
         let realm = try! Realm()
         try? realm.write {
-            realm.add(objects, update: .all)
+            realm.add(objects, update: .modified)
         }
     }
     

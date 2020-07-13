@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 @objcMembers
-public final class Brewery: Object, Codable {
+public class Brewery: Object, Codable {
     dynamic var id: Int = 0
     dynamic var name: String? = nil
     dynamic var breweryType: String? = nil
@@ -26,7 +26,7 @@ public final class Brewery: Object, Codable {
     dynamic var updatedAt: String? = nil
     var tagList: List<String> = List()
     
-    override public static func primaryKey() -> String? {
+    @objc open override class func primaryKey() -> String? {
         return "id"
     }
     
@@ -47,7 +47,7 @@ public final class Brewery: Object, Codable {
         case tagList = "tag_list"
     }
     
-    convenience public init(from decoder: Decoder) throws {
+    required convenience public init(from decoder: Decoder) throws {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
         

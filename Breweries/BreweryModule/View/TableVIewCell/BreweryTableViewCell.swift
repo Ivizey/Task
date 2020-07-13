@@ -48,7 +48,7 @@ class BreweryTableViewCell: UITableViewCell {
         cellData.append(attribute.setText(description: "Postal code: ", text: brewery.postalCode))
         cellData.append(attribute.setText(description: "Country: ", text: brewery.country))
         cellData.append(attribute.setText(description: "Phone: ", text: brewery.phone))
-        cellData.append(attribute.setText(description: "Tag: ", text: brewery.tagList.first))
+//        cellData.append(attribute.setText(description: "Tag: ", text: brewery.tagList.first))
         contentLabel.attributedText = cellData
         
         if brewery.websiteUrl == nil || brewery.websiteUrl?.count ?? 0 <= 0 {

@@ -115,9 +115,9 @@
 		4740A5E0244D994C00E5BAA1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				47636829244E16BD00D477C1 /* Endpoint.swift */,
-				4763682B244E170300D477C1 /* DataLoader.swift */,
 				4740A5D7244B495400E5BAA1 /* BreweriesStorage.swift */,
+				4763682B244E170300D477C1 /* DataLoader.swift */,
+				47636829244E16BD00D477C1 /* Endpoint.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";

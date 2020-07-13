@@ -43,7 +43,7 @@ class BreweriesPresenter: BreweriesViewPresenterProtocol {
                 self.breweries = breweries
                 self.view?.succes()
             }
-        }
+        }   
     }
     
     func openMapView(location: Location?) {
