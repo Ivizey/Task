@@ -47,6 +47,10 @@ class BreweriesRepositoryImpl: BreweriesRepository {
             }
         }
     }
+    
+    func cacheData(_ breweries: [Brewery]) {
+        storage.cache(breweries)
+    }
 }
 
 extension BreweriesRepositoryImpl {

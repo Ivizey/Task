@@ -7,27 +7,32 @@
 //
 
 import UIKit
-import MapKit
 
 class BreweryView: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var searchField: UITextField!
     private var timer: Timer?
     var presenter: BreweriesViewPresenterProtocol!
-    var storage = BreweriesStorageImpl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchField.attributedPlaceholder = presenter.setSearchPlaceholder()
+        searchField.setSearchPlaceholder()
         tableView.register(UINib(nibName: "BreweryTableViewCell", bundle: nil),
                            forCellReuseIdentifier: "BreweryTableViewCell")
     }
+    
     @IBAction func searchFieldAction(_ sender: UITextField) {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
             self.presenter.getBreweries(search: sender.text ?? nil) 
         })
+    }
+    
+    private func tableViewScroll() {
+        if presenter.breweries?.count ?? 0 > 0  {
+            tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+        }
     }
 }
 
@@ -48,16 +53,7 @@ extension BreweryView: UITableViewDataSource {
 extension BreweryView: BreweriesViewProtocol {
     func succes() {
         tableView.reloadData()
-        if presenter.breweries?.count ?? 0 > 0  {
-            tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
-        }
-        guard let breweries = presenter.breweries else { return }
-        storage.cache(breweries)
-        print(storage.retrieveObjects(by: Brewery.self).count)
-    }
-    
-    func failure(error: Error) {
-        print(error.localizedDescription)
+        tableViewScroll()
     }
 }
 

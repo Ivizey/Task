@@ -10,7 +10,8 @@
 		4740A5D8244B495400E5BAA1 /* BreweriesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4740A5D7244B495400E5BAA1 /* BreweriesStorage.swift */; };
 		47431CAF24B5B5BB0058B66E /* LinkButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47431CAE24B5B5BB0058B66E /* LinkButton.xib */; };
 		47431CB124B5B79A0058B66E /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47431CB024B5B79A0058B66E /* LinkButton.swift */; };
-		474696E5249E1A210086B9B0 /* TextAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474696E4249E1A210086B9B0 /* TextAttribute.swift */; };
+		47431CB924BC711E0058B66E /* TextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47431CB824BC711E0058B66E /* TextField+Extension.swift */; };
+		47431CBB24BC87520058B66E /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47431CBA24BC87520058B66E /* NSAttributedString+Extension.swift */; };
 		47470B4824B30AAC00789988 /* MapButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47470B4724B30AAC00789988 /* MapButton.xib */; };
 		47470B4A24B30AB800789988 /* MapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47470B4924B30AB800789988 /* MapButton.swift */; };
 		4755C55724AA0A5400A98EB4 /* Brewery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4755C55624AA0A5400A98EB4 /* Brewery.swift */; };
@@ -41,7 +42,8 @@
 		4740A5D7244B495400E5BAA1 /* BreweriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreweriesStorage.swift; sourceTree = "<group>"; };
 		47431CAE24B5B5BB0058B66E /* LinkButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LinkButton.xib; sourceTree = "<group>"; };
 		47431CB024B5B79A0058B66E /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
-		474696E4249E1A210086B9B0 /* TextAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAttribute.swift; sourceTree = "<group>"; };
+		47431CB824BC711E0058B66E /* TextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Extension.swift"; sourceTree = "<group>"; };
+		47431CBA24BC87520058B66E /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		47470B4724B30AAC00789988 /* MapButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapButton.xib; sourceTree = "<group>"; };
 		47470B4924B30AB800789988 /* MapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapButton.swift; sourceTree = "<group>"; };
 		4755C55624AA0A5400A98EB4 /* Brewery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brewery.swift; sourceTree = "<group>"; };
@@ -126,7 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				4763682D244E174D00D477C1 /* BreweriesRepository.swift */,
-				4763682F244E17CF00D477C1 /* RealmDescribing.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -167,6 +168,16 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		47431CB724BC708A0058B66E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4763682F244E17CF00D477C1 /* RealmDescribing.swift */,
+				47431CB824BC711E0058B66E /* TextField+Extension.swift */,
+				47431CBA24BC87520058B66E /* NSAttributedString+Extension.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		47470B4B24B30AC400789988 /* MapButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,12 +209,12 @@
 			isa = PBXGroup;
 			children = (
 				47431CB224BC35910058B66E /* Application */,
-				474696E4249E1A210086B9B0 /* TextAttribute.swift */,
 				47B53F3A249A3C6E0056EF6F /* Builder */,
 				47B53F2C2499F8760056EF6F /* Router */,
 				47B53F262499F6B80056EF6F /* BreweryModule */,
 				47B53F2D249A01A10056EF6F /* MapModule */,
 				4740A5DF244D993C00E5BAA1 /* BusinessLogic */,
+				47431CB724BC708A0058B66E /* Helpers */,
 				47431CB324BC35BB0058B66E /* Storyboards */,
 				47431CB424BC36180058B66E /* Resources */,
 			);
@@ -419,14 +430,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				47431CB124B5B79A0058B66E /* LinkButton.swift in Sources */,
-				474696E5249E1A210086B9B0 /* TextAttribute.swift in Sources */,
 				476885A724478092006F14AF /* MapView.swift in Sources */,
 				4763682C244E170300D477C1 /* DataLoader.swift in Sources */,
 				4768858D244753EF006F14AF /* BreweryView.swift in Sources */,
 				47470B4A24B30AB800789988 /* MapButton.swift in Sources */,
+				47431CBB24BC87520058B66E /* NSAttributedString+Extension.swift in Sources */,
 				4763682A244E16BD00D477C1 /* Endpoint.swift in Sources */,
 				47688589244753EF006F14AF /* AppDelegate.swift in Sources */,
 				4755C55724AA0A5400A98EB4 /* Brewery.swift in Sources */,
+				47431CB924BC711E0058B66E /* TextField+Extension.swift in Sources */,
 				4768858B244753EF006F14AF /* SceneDelegate.swift in Sources */,
 				47B53F292499F7720056EF6F /* BreweryPresenter.swift in Sources */,
 				47636830244E17CF00D477C1 /* RealmDescribing.swift in Sources */,

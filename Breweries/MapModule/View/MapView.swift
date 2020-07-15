@@ -28,10 +28,8 @@ extension MapView: MapViewProtocol {
     func setLocation(location: Location?) {
         guard let location = location else { return }
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        
-        let latitude = Double(location.latitude)
-        let longitude = Double(location.longitude)
-        let coordinate = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
+        guard let latitude = Double(location.latitude), let longitude = Double(location.longitude) else { return }
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
         let region = MKCoordinateRegion(center: coordinate, span: span)
         let annotation = MKPointAnnotation()
