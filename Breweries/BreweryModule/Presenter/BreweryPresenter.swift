@@ -10,16 +10,14 @@ import Foundation
 
 protocol BreweriesViewProtocol: class {
     func succes()
-    func failure(error: Error)
 }
 
 protocol BreweriesViewPresenterProtocol: class {
     init(view: BreweriesViewProtocol, networkService: BreweriesRepositoryImpl, router: RouterProtocol)
     func getBreweries(search: String?)
-    var breweries: [Brewery]? { get set }
     func openMapView(location: Location?)
     func openBrowser(url: URL)
-    func setSearchPlaceholder() -> NSMutableAttributedString
+    var breweries: [Brewery]? { get set }
 }
 
 class BreweriesPresenter: BreweriesViewPresenterProtocol {
@@ -27,7 +25,6 @@ class BreweriesPresenter: BreweriesViewPresenterProtocol {
     let networkService: BreweriesRepositoryImpl!
     var router: RouterProtocol?
     var breweries: [Brewery]?
-    let attribute = TextAttribute()
     
     required init(view: BreweriesViewProtocol, networkService: BreweriesRepositoryImpl, router: RouterProtocol) {
         self.view = view
@@ -41,6 +38,7 @@ class BreweriesPresenter: BreweriesViewPresenterProtocol {
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 self.breweries = breweries
+                self.networkService.cacheData(breweries)
                 self.view?.succes()
             }
         }   
@@ -52,9 +50,5 @@ class BreweriesPresenter: BreweriesViewPresenterProtocol {
     
     func openBrowser(url: URL) {
         router?.openBrowser(url: url)
-    }
-    
-    func setSearchPlaceholder() -> NSMutableAttributedString {
-        return attribute.setSearchPlaceholder()
     }
 }

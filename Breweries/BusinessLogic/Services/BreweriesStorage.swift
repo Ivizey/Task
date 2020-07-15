@@ -25,6 +25,6 @@ class BreweriesStorageImpl: BreweriesStorage {
     // Fetch data from Realm data base
     func retrieveObjects<T: Object>(by type: T.Type) -> [T] {
         let realm = try! Realm()
-        return Array(realm.objects(type))
+        return Array(realm.objects(type.self))
     }
 }

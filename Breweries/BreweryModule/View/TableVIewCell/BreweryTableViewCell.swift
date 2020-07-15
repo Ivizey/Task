@@ -18,7 +18,6 @@ class BreweryTableViewCell: UITableViewCell {
     @IBOutlet private weak var cellViewContent: UIView!
     @IBOutlet private weak var stackView: UIStackView!
     weak var delegate: CellSubclassDelegate?
-    private let attribute = TextAttribute()
     private let mapButton = MapButton()
     private let linkButton = LinkButton()
     var brewery: Brewery? {
@@ -37,37 +36,44 @@ class BreweryTableViewCell: UITableViewCell {
         self.delegate = nil
     }
     
+    private func removeFromCell(_ view: UIView) {
+        view.isHidden = true
+        stackView.removeArrangedSubview(view)
+    }
+    
+    private func setToCell(_ view: UIView) {
+        view.isHidden = false
+        stackView.addArrangedSubview(view)
+    }
+    
     func setupCell(brewery: Brewery?) {
         guard let brewery = brewery else { return }
         let cellData = NSMutableAttributedString()
-        cellData.append(attribute.setTitle(title: brewery.name, size: 20))
-        cellData.append(attribute.setText(description: "Brewery type: ", text: brewery.breweryType))
-        cellData.append(attribute.setText(description: "Street: ", text: brewery.street))
-        cellData.append(attribute.setText(description: "City: ", text: brewery.city))
-        cellData.append(attribute.setText(description: "State: ", text: brewery.state))
-        cellData.append(attribute.setText(description: "Postal code: ", text: brewery.postalCode))
-        cellData.append(attribute.setText(description: "Country: ", text: brewery.country))
-        cellData.append(attribute.setText(description: "Phone: ", text: brewery.phone))
-//        cellData.append(attribute.setText(description: "Tag: ", text: brewery.tagList.first))
+        let attr = NSAttributedString()
+        cellData.append(attr.title(brewery.name, 20))
+        cellData.append(attr.text("Brewery type: ", brewery.breweryType))
+        cellData.append(attr.text("Street: ", brewery.street))
+        cellData.append(attr.text("City: ", brewery.city))
+        cellData.append(attr.text("State: ", brewery.state))
+        cellData.append(attr.text("Postal code: ", brewery.postalCode))
+        cellData.append(attr.text("Country: ", brewery.country))
+        cellData.append(attr.text("Phone: ", brewery.phone))
+        cellData.append(attr.text("Tag: ", brewery.tagList.first))
         contentLabel.attributedText = cellData
         
         if brewery.websiteUrl == nil || brewery.websiteUrl?.count ?? 0 <= 0 {
-            linkButton.isHidden = true
-            stackView.removeArrangedSubview(linkButton)
+            removeFromCell(linkButton)
         } else {
-            linkButton.isHidden = false
-            linkButton.linkButton.setAttributedTitle(attribute.setButtonTitle(title: brewery.websiteUrl!), for: .normal)
+            linkButton.linkButton.setAttributedTitle(NSAttributedString().setButtonTitle(title: brewery.websiteUrl!), for: .normal)
             linkButton.linkButton.addTarget(self, action: #selector(linkButtonTapped), for: .touchUpInside)
-            stackView.addArrangedSubview(linkButton)
+            setToCell(linkButton)
         }
-        
+
         if brewery.longitude == nil || brewery.latitude == nil {
-            mapButton.isHidden = true
-            stackView.removeArrangedSubview(mapButton)
+            removeFromCell(mapButton)
         } else {
-            mapButton.isHidden = false
             mapButton.showMapButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
-            stackView.addArrangedSubview(mapButton)
+            setToCell(mapButton)
         }
     }
     
@@ -79,16 +85,12 @@ class BreweryTableViewCell: UITableViewCell {
     }
     
     @objc func mapButtonTapped(sender: UIButton) {
-        guard let title = brewery?.name,
-            let locationName = brewery?.street,
-            let latitude = brewery?.latitude,
-            let longitude = brewery?.longitude
+        guard let title = brewery?.name, let locationName = brewery?.street,
+            let latitude = brewery?.latitude, let longitude = brewery?.longitude
             else { return }
         
-        let location = Location(title: title,
-                                locationName: locationName,
-                                latitude: latitude,
-                                longitude: longitude)
+        let location = Location(title: title, locationName: locationName,
+                                latitude: latitude, longitude: longitude)
         self.delegate?.mapButtonTapped(cell: self, location: location)
     }
 }

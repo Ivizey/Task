@@ -6,7 +6,6 @@
 //  Copyright © 2020 Pavel Bondar. All rights reserved.
 //
 
-import Foundation
 import RealmSwift
 
 @objcMembers
