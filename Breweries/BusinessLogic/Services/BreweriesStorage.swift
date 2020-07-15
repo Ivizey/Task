@@ -17,13 +17,14 @@ class BreweriesStorageImpl: BreweriesStorage {
     // Store objects to Realm data base
     func cache(_ objects: [Object]) {
         let realm = try! Realm()
-        try? realm.write{
-            realm.add(objects, update: .all)
+        try? realm.write {
+            realm.add(objects, update: .modified)
         }
     }
+    
     // Fetch data from Realm data base
-    func retrieveObjects<T>(by type: T.Type) -> [T] where T : Object {
+    func retrieveObjects<T: Object>(by type: T.Type) -> [T] {
         let realm = try! Realm()
-        return Array(realm.objects(type))
+        return Array(realm.objects(type.self))
     }
 }

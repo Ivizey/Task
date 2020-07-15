@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 protocol RouterMain {
     var navigationController: UINavigationController? { get set }
@@ -16,6 +17,7 @@ protocol RouterMain {
 protocol RouterProtocol: RouterMain {
     func initialViewController()
     func showMap(location: Location?)
+    func openBrowser(url: URL)
 }
 
 class Router: RouterProtocol {
@@ -41,5 +43,12 @@ class Router: RouterProtocol {
         }
     }
     
-    
+    func openBrowser(url: URL) {
+        if let navigationController = navigationController {
+            let config = SFSafariViewController.Configuration()
+            config.entersReaderIfAvailable = true
+            let vc = SFSafariViewController(url: url, configuration: config)
+            navigationController.pushViewController(vc, animated: true)
+        }
+    }
 }

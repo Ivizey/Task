@@ -10,17 +10,17 @@ import Foundation
 
 protocol BreweriesViewProtocol: class {
     func succes()
-    func failure(error: Error)
 }
 
 protocol BreweriesViewPresenterProtocol: class {
     init(view: BreweriesViewProtocol, networkService: BreweriesRepositoryImpl, router: RouterProtocol)
     func getBreweries(search: String?)
+    func openMapView(location: Location?)
+    func openBrowser(url: URL)
     var breweries: [Brewery]? { get set }
-    func tapOnTheItem(location: Location?)
 }
 
-class BreweriesPresenter: BreweriesViewPresenterProtocol{
+class BreweriesPresenter: BreweriesViewPresenterProtocol {
     weak var view: BreweriesViewProtocol?
     let networkService: BreweriesRepositoryImpl!
     var router: RouterProtocol?
@@ -38,12 +38,17 @@ class BreweriesPresenter: BreweriesViewPresenterProtocol{
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 self.breweries = breweries
+                self.networkService.cacheData(breweries)
                 self.view?.succes()
             }
-        }
+        }   
     }
     
-    func tapOnTheItem(location: Location?) {
+    func openMapView(location: Location?) {
         router?.showMap(location: location)
+    }
+    
+    func openBrowser(url: URL) {
+        router?.openBrowser(url: url)
     }
 }
